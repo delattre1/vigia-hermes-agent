@@ -79,6 +79,8 @@ def _fold(store: VigiaStore, item: Item, observation: Observation, decided: list
     instant = clock.iso()
     item.title = observation.title or item.title
     item.currency = observation.currency or item.currency
+    if observation.condition:
+        item.condition = observation.condition
     item.available = observation.available if observation.available is not None else item.available
     item.last_checked_at = instant
     item.last_status = "ok"

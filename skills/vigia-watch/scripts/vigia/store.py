@@ -64,6 +64,8 @@ class VigiaStore:
             return StoreKind.MERCADO_LIVRE
         if "amazon." in host:
             return StoreKind.AMAZON
+        if "olx." in host:
+            return StoreKind.OLX
         return StoreKind.GENERIC
 
     def compact_view(self, item: Item) -> dict[str, Any]:
@@ -79,6 +81,7 @@ class VigiaStore:
             "threshold_pct": item.threshold_pct,
             "low": item.low,
             "available": item.available,
+            "condition": item.condition,
             "last_status": item.last_status,
             "last_checked_at": item.last_checked_at,
             "last_error": item.last_error,

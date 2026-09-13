@@ -12,7 +12,7 @@ from vigia.store import VigiaStore
 
 
 def add(store: VigiaStore, url: str, *, title: str, currency: str, target: float | None,
-        threshold_pct: float | None) -> Item:
+        threshold_pct: float | None, condition: str = "") -> Item:
     """Register a product. Prices arrive later, at the first sweep or observation."""
     canonical = store_module.canonical_url(url)
     item = Item(
@@ -24,6 +24,7 @@ def add(store: VigiaStore, url: str, *, title: str, currency: str, target: float
         added_at=clock.iso(),
         target=target,
         threshold_pct=threshold_pct,
+        condition=condition,
     )
     return store.add(item)
 

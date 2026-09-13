@@ -33,6 +33,7 @@ from vigia.engine import digest, sweep, watchlist  # noqa: E402
 from vigia.sources import amazon  # noqa: E402
 from vigia.sources import search as search_module  # noqa: E402
 from vigia.sources.base import Observation  # noqa: E402
+from vigia.models import StoreKind  # noqa: E402
 from vigia.store import VigiaStore  # noqa: E402
 
 HOME = __import__("os").environ.get("VIGIA_HOME", "/var/lib/hermes/vigia")
@@ -51,6 +52,9 @@ def fail(message: str) -> int:
 def cmd_add(args: argparse.Namespace) -> int:
     store = VigiaStore(HOME)
     kind = store.kind_for_url(store_module.canonical_url(args.url))
+    # OLX is a used marketplace by nature: the tag exists even before the
+    # first read confirms it, and every reply says so.
+    default_condition = "usado" if kind == StoreKind.OLX else ""
     from vigia.sources import observe
     try:
         first: Observation = observe(str(kind), store_module.canonical_url(args.url))
@@ -59,13 +63,14 @@ def cmd_add(args: argparse.Namespace) -> int:
         # the sweep (or a screenshot) will price it later.
         item = watchlist.add(
             store, args.url, title="", currency="",
-            target=args.target, threshold_pct=args.threshold,
+            target=args.target, threshold_pct=args.threshold, condition=default_condition,
         )
         store.save()
         return emit({"added": store.compact_view(item), "first_read": None, "note": f"no price yet: {error}"})
     item = watchlist.add(
         store, args.url, title=first.title, currency=first.currency,
         target=args.target, threshold_pct=args.threshold,
+        condition=first.condition or default_condition,
     )
     alerts = sweep.apply_observation(store, item, first)
     return emit({

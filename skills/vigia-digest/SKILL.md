@@ -32,9 +32,11 @@ always:
 
 Top of the list first: 🎯 items on target, then 🏆 floors, then movers
 (`history`'s last two points tell you the movement), then the quiet ones
-compressed: "Sem novidades: Air Fryer, Echo Dot." Stale items close the
-digest with a ⚠️ line — which ones, for how long, and the offer to re-check
-or take a screenshot. Never show an old price as if it were current.
+compressed: "Sem novidades: Air Fryer, Echo Dot." A used item says it on
+every line — "(usado · OLX)" — and is never measured against new-store
+prices. Stale items close the digest with a ⚠️ line — which ones, for how
+long, and the offer to re-check or take a screenshot. Never show an old
+price as if it were current.
 
 The flag is the item currency's flag (BRL 🇧🇷, USD 🇺🇸). One line per item,
 no paragraphs.

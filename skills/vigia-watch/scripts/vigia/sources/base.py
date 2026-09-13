@@ -24,6 +24,7 @@ class Observation:
     price: float | None
     currency: str
     available: bool | None
+    condition: str | None = None    # "novo" | "usado" when the page says
 
 
 def parse_price(raw: object) -> float | None:

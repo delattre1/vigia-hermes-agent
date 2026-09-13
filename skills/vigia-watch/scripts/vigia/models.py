@@ -13,6 +13,7 @@ HISTORY_CAP = 200
 class StoreKind(StrEnum):
     MERCADO_LIVRE = "mercadolivre"
     AMAZON = "amazon"
+    OLX = "olx"
     GENERIC = "jsonld"
 
 
@@ -44,6 +45,8 @@ class Item:
     low: float | None = None        # lowest price ever observed
     low_at: str | None = None
     available: bool | None = None   # last stock reading
+    condition: str = ""             # "" unknown | "novo" | "usado" -- a used price
+                                    # never compares against a new-store price
     last_checked_at: str | None = None
     last_status: str = "new"        # "new" | "ok" | "stale" | "error"
     last_error: str | None = None
@@ -68,6 +71,7 @@ class Item:
             "low": self.low,
             "low_at": self.low_at,
             "available": self.available,
+            "condition": self.condition,
             "last_checked_at": self.last_checked_at,
             "last_status": self.last_status,
             "last_error": self.last_error,
@@ -89,6 +93,7 @@ class Item:
             low=raw.get("low"),
             low_at=raw.get("low_at"),
             available=raw.get("available"),
+            condition=raw.get("condition", ""),
             last_checked_at=raw.get("last_checked_at"),
             last_status=raw.get("last_status", "new"),
             last_error=raw.get("last_error"),

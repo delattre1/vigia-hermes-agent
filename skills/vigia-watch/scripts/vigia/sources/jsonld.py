@@ -43,11 +43,15 @@ def _parse_ld_object(blob: bytes) -> Observation | None:
         if price is None:
             continue
         availability = str(offer.get("availability", "")).lower()
+        item_condition = str(offer.get("itemCondition") or product.get("itemCondition") or "").lower()
+        condition = "usado" if "usedcondition" in item_condition else \
+                    "novo" if "newcondition" in item_condition else None
         return Observation(
             title=str(product.get("name") or "").strip(),
             price=price,
             currency=str(offer.get("priceCurrency") or ""),
             available=None if not availability else "instock" in availability,
+            condition=condition,
         )
     return None
 

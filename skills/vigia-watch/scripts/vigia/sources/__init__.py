@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-from vigia.sources import amazon, jsonld, mercadolivre, scraperapi
+from vigia.sources import amazon, jsonld, mercadolivre, olx, scraperapi
 from vigia.sources.base import Observation, SourceError
 
 Reader = Callable[[str], Observation]
