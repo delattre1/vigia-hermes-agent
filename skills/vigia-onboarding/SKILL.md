@@ -16,8 +16,10 @@ Finished means `watch.py list` answers `onboarding_missing: []`.
 
 1. **Language** — you detect it from their messages; no question. Save it the
    first time they reply (`config set language=pt-BR`).
-2. **Timezone** — needed so the digest lands at the right local hour. Ask
-   plainly; if they say a city, use its IANA zone. Save it.
+2. **Timezone** — needed so the resumo da manhã lands at the right local
+   hour. Say "resumo" to the user, never "digest" — that is the command's
+   name, not a word for people. Ask plainly; if they say a city, use its
+   IANA zone. Save it.
 3. **Digest time** — offer the default: "resumo todo dia às 08:30, bom?"
    Save as `digest_time=HH:MM`, and `digest_enabled=false` if they decline.
 4. **Alert rule** — offer the default: "aviso quando cair 5%". If they name a

@@ -71,7 +71,8 @@ celebration line; never stack more than two lines beyond the price itself.
 
 When a link cannot be read, or the user has no link (an app, a store screen):
 
-1. Ask for a screenshot of the product page. It arrives as a file path.
+1. Ask for a screenshot of the product page — in their words, "manda um
+   print" (pt-BR) or "send a screenshot" (EN). It arrives as a file path.
 2. Read the product name and the price **exactly as displayed** off the image.
 3. Record it — the script parses, you do not:
 

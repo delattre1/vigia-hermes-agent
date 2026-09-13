@@ -5,6 +5,10 @@ description: The morning digest of everything being watched, and "compro ou espe
 
 # Vigia Digest — the morning read
 
+The user never hears the word "digest": in their language it is the
+**resumo do dia** (pt-BR) or **morning roundup** (EN). The command keeps
+its name; the words they read do not.
+
 One payload, one message:
 
     /opt/hermes/.venv/bin/python3 /var/lib/hermes/skills/vigia-watch/scripts/watch.py digest
