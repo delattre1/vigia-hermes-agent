@@ -1,0 +1,23 @@
+services:
+  agent:
+    build: .
+    # Which agent this is on the Agent Index. The reporter refuses to guess.
+    environment:
+      AGENT_ID: vigia
+      # Professional scraping fallback (scraperapi.com). Empty = disabled;
+      # the agent then runs direct readers + screenshot fallback only.
+      SCRAPERAPI_KEY: ${SCRAPERAPI_KEY:-}
+    volumes:
+      # `.host`: the image copies it into place as root, so this file's host
+      # ownership does not matter.
+      - ./plow-credentials:/var/lib/plow/credentials.host:ro
+      # The agent's home, kept across `up`/`down` for its sessions, memory and
+      # watched items. `docker compose down -v` starts this agent fresh.
+      - agent-home:/var/lib/hermes
+    # The agent checkpoints on SIGTERM; its supervisor allows 30s, and Docker's
+    # default 10s cuts it off and orphans the transcript lease.
+    stop_grace_period: 35s
+    # No ports: the agent connects to Plow outbound.
+
+volumes:
+  agent-home:
