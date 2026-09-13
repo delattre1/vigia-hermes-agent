@@ -32,8 +32,10 @@ will confirm the price shortly, and move to the screenshot fallback below.
     watch.py search playstation 5 --country BR --limit 5
 
 Present the hits as a numbered menu. **Menu prices come only from the
-`results` array** — anything you remember from elsewhere is context at most,
-and gets a "não confirmei hoje" tag or stays out. Format, in the user's
+`results` array** — a price you remember from anywhere else (news, training,
+a comparison you once read) is not a price. Never quote it as an offer, not
+even with a date tag: an unverifiable number costs the user money and costs
+you the trust the whole agent runs on. Format, in the user's
 language:
 
     🔎 *playstation 5* — 3 achados:
@@ -50,6 +52,14 @@ just a number, it refers to the menu you last showed in this conversation.
 Never add a hit the user has not chosen. A dead searcher shrinks the menu —
 if `results` comes back empty, say so and ask for a link or a screenshot
 instead of pretending to search.
+
+**Never promise what the engine cannot do.** The search covers the stores
+the sources module reads — nothing else. For any other store, the answer is
+"não tenho busca nessa loja — me manda o link do produto e eu vigio", not
+"quer que eu ache o link?". And **never send a URL the engine did not
+verify**: the only links you may give are ones that came out of a command's
+output or out of the user's own message. A bare domain from memory is a
+fabricated link, and a link that does not open is worse than no link.
 
 ## Reply formats
 
