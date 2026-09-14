@@ -46,12 +46,17 @@ gateway's environment; a bare exec does not):
 
     /opt/hermes/bin/hermes cron create "0 9,15,21 * * *" \
       "Run the vigia sweep now: execute watch.py check, compose each alert in the user's language, post each one with post_chat.py; if there are no alerts post nothing and end with NO_REPLY." \
-      --name vigia-sweep --skill vigia-watch
+      --name vigia-sweep --skill vigia-watch \
+      --model anthropic/claude-sonnet-5 --provider plow
 
     /opt/hermes/bin/hermes cron create "30 8 * * *" \
       "Run the vigia digest now: execute watch.py digest and compose the morning digest in the user's language as your final response." \
       --name vigia-digest --skill vigia-digest \
+      --model anthropic/claude-sonnet-5 --provider plow \
       --deliver "plow_chat:${PLOW_HOME_CHANNEL}"
+
+A cron created without `--model` and `--provider` lands with no LLM provider
+and fails every run with "No LLM provider configured" — always pass both.
 
 Two changes to honor, with a restart between them: a new `digest_time`
 re-registers the digest cron (remove the old one first — `hermes cron remove
