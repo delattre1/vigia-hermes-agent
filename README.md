@@ -1,7 +1,7 @@
 # Vigia
 
-> **Text a product link; I watch the price and tell you when it drops.**
-> **Manda o link, eu vigio o preço.**
+> **Manda um link, eu vigio o preço e aviso quando cair.**
+> **Drop a link; I watch the price and tell you when it drops.**
 
 A price-watching [Plow](https://plow.co) agent. Text it a product link — or a
 product name — and it watches the price for you, texts you the moment it
