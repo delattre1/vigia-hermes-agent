@@ -46,10 +46,19 @@ plow-agents mint ln_xxx       # writes ./plow-credentials
 docker compose up --build -d
 ```
 
+`mint` must run **before** `up`: the compose file mounts `./plow-credentials`,
+and Docker silently creates it as a *directory* if the file is not there yet.
+If that happened, `docker compose down -v && rmdir plow-credentials`, then
+mint the line and start over.
+
 Watch `docker compose logs -f agent` until
 `plow-init: configured ... as cht_` appears, then text your line to talk to
 it. The first product link you send is a watch — onboarding happens after
 that, never before.
+
+If the build fails pulling the base image from `public.ecr.aws` with a 403,
+the cause is a stale credential: `docker logout public.ecr.aws`, then build
+again.
 
 Optional: set `SCRAPERAPI_KEY` in the environment (free tier at
 [scraperapi.com](https://www.scraperapi.com)) to turn on the professional
